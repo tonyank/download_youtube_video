@@ -1,6 +1,6 @@
 name: Down
 
-# on: push
+on: push
 
 jobs:
   download-youtube-video:
