@@ -17,11 +17,11 @@ jobs:
       - name: 部署 youtube-dl
         run: wget -c 'http://www.yt-dl.org/downloads/latest/youtube-dl' && chmod +x ./youtube-dl
 
-      - name: 查询
-        run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
+      #- name: 查询
+        #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
 
-      #- name: 下载 YouTube 视频
-        #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg-git-20210405-amd64-static/ffmpeg -a ../video_list.txt
+      - name: 下载 YouTube 视频
+        run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg-git-20210405-amd64-static/ffmpeg -a ../video_list.txt
 
-      #- name: 使用 rclone 将文件上传到 OneDrive
-        #run: rclone-v1.55.0-linux-amd64/rclone copy --config rclone.conf ./video_folder/ 'OneDrive_ty_30GB:'
+      - name: 使用 rclone 将文件上传到 OneDrive
+        run: rclone-v1.58.1-linux-amd64/rclone copy --config rclone.conf ./video_folder/ 'OneDrive_ty_30GB:'
