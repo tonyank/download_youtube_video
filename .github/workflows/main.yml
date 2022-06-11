@@ -21,7 +21,8 @@ jobs:
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
 
       - name: 下载 YouTube 视频
-        run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
+        #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
+        run: mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg 'https://www.xvideos.com/video68659869/honey_play_box_wtf_step_sister_gets_huge_double_creampie_with_extreme_shaking_screaming_squirting_orgasms_while_boyfriend_away_-_real_wet_amatuers'
 
       - name: 使用 rclone 将文件上传到 OneDrive
         run: rclone-v1.58.1-linux-amd64/rclone --config rclone.conf copy ./video_folder/ 'OneDrive_ty_30GB:'
