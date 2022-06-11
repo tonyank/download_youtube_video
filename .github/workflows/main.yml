@@ -11,7 +11,8 @@ jobs:
         run: wget -c 'https://downloads.rclone.org/v1.58.1/rclone-v1.58.1-linux-amd64.zip' && unzip -q 'rclone-v1.58.1-linux-amd64.zip' && echo '${{ secrets.RCLONE_CONF }}' > rclone.conf
 
       - name: 部署 ffmpeg
-        run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
+        #run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
+        run: rclone-v1.58.1-linux-amd64/rclone copy --config rclone.conf -P 'OneDrive_ty_30GB:ffmpeg-git-amd64-static.tar.xz' ./ && tar -xf ffmpeg-git-amd64-static.tar.xz
 
       - name: 部署 youtube-dl
         run: wget -c 'http://www.yt-dl.org/downloads/latest/youtube-dl' && chmod +x ./youtube-dl
