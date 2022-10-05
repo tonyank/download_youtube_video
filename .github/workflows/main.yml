@@ -21,8 +21,10 @@ jobs:
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
 
       - name: 下载 YouTube 视频
-        run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
+        #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
         #run: mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg 'https://www.xvideos.com/video48321529/avengers_-_captain_marvel_get_an_amazing_dick'
+        run: mkdir ./video_folder/ && cd ./video_folder/ && ../ffmpeg -i "https://hls-hw.xvideos-cdn.com/videos/hls/ab/21/7f/ab217f6913133a36fe15f7179c886524/hls-1080p-d70fc.m3u8?e=1664992466&l=0&h=220a423206d1a98aa2de5e420398a72c"
+        
 
       - name: 使用 rclone 将文件上传到 OneDrive
         run: rclone-v1.58.1-linux-amd64/rclone --config rclone.conf copy ./video_folder/ 'OneDrive_ty_30GB:'
