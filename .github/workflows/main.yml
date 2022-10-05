@@ -13,7 +13,7 @@ jobs:
 
       - name: 部署 ffmpeg
         #run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
-        run: rclone-v1.58.1-linux-amd64/rclone --config rclone.conf copy -P 'OneDrive_ty_30GB:ffmpeg-git-amd64-static.tar.xz' ./ && tar -xf ffmpeg-git-amd64-static.tar.xz
+        run: rclone-v1.59.2-linux-amd64/rclone copy --config rclone.conf -P 'OneDrive_ty_30GB:ffmpeg-git-amd64-static.tar.xz' ./ && tar -xf ffmpeg-git-amd64-static.tar.xz
 
       - name: 部署 yt-dlp
         run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp'
