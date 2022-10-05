@@ -8,14 +8,15 @@ jobs:
 
     steps:
       - name: 部署 rclone
-        run: wget -c 'https://downloads.rclone.org/v1.58.1/rclone-v1.58.1-linux-amd64.zip' && unzip -q 'rclone-v1.58.1-linux-amd64.zip' && echo '${{ secrets.RCLONE_CONF }}' > rclone.conf
+        run: wget -c 'https://downloads.rclone.org/v1.59.2/rclone-v1.59.2-linux-amd64.zip' && unzip 'rclone-v1.59.2-linux-amd64.zip' && echo '${{ secrets.RCLONE_CONF }}' > rclone.conf
+
 
       - name: 部署 ffmpeg
         #run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
         run: rclone-v1.58.1-linux-amd64/rclone --config rclone.conf copy -P 'OneDrive_ty_30GB:ffmpeg-git-amd64-static.tar.xz' ./ && tar -xf ffmpeg-git-amd64-static.tar.xz
 
-      - name: 部署 youtube-dl
-        run: wget -c 'http://www.yt-dl.org/downloads/latest/youtube-dl' && chmod +x ./youtube-dl
+      - name: 部署 yt-dlp
+        run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp'
 
       #- name: 查询
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
@@ -23,7 +24,7 @@ jobs:
       - name: 下载 YouTube 视频
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
         #run: mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg 'https://www.xvideos.com/video48321529/avengers_-_captain_marvel_get_an_amazing_dick'
-        run: mkdir ./video_folder/ && cd ./video_folder/ && ../ffmpeg -i "https://hls-hw.xvideos-cdn.com/videos/hls/ab/21/7f/ab217f6913133a36fe15f7179c886524/hls-1080p-d70fc.m3u8?e=1664992466&l=0&h=220a423206d1a98aa2de5e420398a72c"
+        run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../yt-dlp -f best --ffmpeg-location ../ffmpeg-git-20210405-amd64-static/ffmpeg -a ../video_list.txt
         
 
       - name: 使用 rclone 将文件上传到 OneDrive
