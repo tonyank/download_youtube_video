@@ -28,4 +28,5 @@ jobs:
         
 
       - name: 使用 rclone 将文件上传到 OneDrive
-        run: rclone-v1.58.1-linux-amd64/rclone --config rclone.conf copy ./video_folder/ 'OneDrive_ty_30GB:'
+        run: rclone-v1.59.2-linux-amd64/rclone copy --config rclone.conf ./video_folder/ 'OneDrive_ty_30GB:'
+
