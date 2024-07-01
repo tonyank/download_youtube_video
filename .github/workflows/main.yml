@@ -11,7 +11,7 @@ jobs:
         run: wget -c 'https://downloads.rclone.org/v1.67.0/rclone-v1.67.0-linux-amd64.zip' && unzip 'rclone-v1.67.0-linux-amd64.zip' && echo '${{ secrets.RCLONE_CONF }}' > rclone.conf
 
 
-      - name: 部署 ffmpeg
+      #- name: 部署 ffmpeg
         #run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
         #run: rclone-v1.60.0-linux-amd64/rclone copy --config rclone.conf -P 'OneDrive_ty_30GB:yt-dlp+ffmpeg+aria2_linux_20221029.tar.xz' ./ && tar -xf yt-dlp+ffmpeg+aria2_linux_20221029.tar.xz
 
@@ -21,7 +21,7 @@ jobs:
       #- name: 查询
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
 
-      - name: 下载 YouTube 视频
+      #- name: 下载 YouTube 视频
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg -a ../video_list.txt
         #run: mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -f 'best' --ffmpeg-location ../ffmpeg 'https://www.xvideos.com/video48321529/avengers_-_captain_marvel_get_an_amazing_dick'
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../yt-dlp+ffmpeg+aria2_linux_20221029/ffmpeg-git-20220910-amd64-static/yt-dlp --write-subs --sub-format zh-Hans-zh-CN --ffmpeg-location ../ffmpeg-git-20220910-amd64-static/ffmpeg --downloader ../yt-dlp+ffmpeg+aria2_linux_20221029/aria2-1.36.0-aarch64-linux-android-build1/aria2c --downloader-args "-x 16" -a ../video_list.txt
