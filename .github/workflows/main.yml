@@ -28,7 +28,7 @@ jobs:
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../yt-dlp+ffmpeg+aria2_linux_20221029/ffmpeg-git-20220910-amd64-static/yt-dlp --ffmpeg-location ../ffmpeg-git-20220910-amd64-static/ffmpeg --downloader ../yt-dlp+ffmpeg+aria2_linux_20221029/aria2-1.36.0-aarch64-linux-android-build1/aria2c --downloader-args "-x 16" -a ../video_list.txt
 
       - name: 部署 golang
-        run: apt -y install golang
+        run: sudo apt -y install golang
 
       #- name: 使用 rclone 将文件上传到 OneDrive
         #run: rclone-v1.60.0-linux-amd64/rclone copy --config rclone.conf ./video_folder/ 'OneDrive_ty_30GB:'
