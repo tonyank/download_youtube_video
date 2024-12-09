@@ -20,7 +20,9 @@ jobs:
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
 
       - name: 下载 YouTube 视频
-        run: ./yt-dlp_linux --cookies-from-browser firefox --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
+        # run: ./yt-dlp_linux --cookies-from-browser firefox --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
+        run: ./yt-dlp_linux --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
+
 
       # - name: 部署 golang
         # run: sudo apt -y install golang
