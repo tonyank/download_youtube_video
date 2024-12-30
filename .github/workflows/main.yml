@@ -14,7 +14,7 @@ jobs:
         run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
 
       - name: 部署 yt-dlp
-        run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.06/yt-dlp_linux'  && chmod +x ./yt-dlp_linux
+        run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.23/yt-dlp_linux'  && chmod +x ./yt-dlp_linux
 
       #- name: 查询
         #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
@@ -22,16 +22,6 @@ jobs:
       - name: 下载 YouTube 视频
         # run: ./yt-dlp_linux --cookies-from-browser firefox --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
         run: ./yt-dlp_linux --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
-
-
-      # - name: 部署 golang
-        # run: sudo apt -y install golang
-      
-      # - name: 克隆仓库
-        # run: git clone --depth 1 https://github.com/greatfire/freebrowser.git
-
-      # - name: 编译
-        # run: cd freebrowser && go mod init fb-proxy && go mod tidy && cd cmd && ./build-proxy.sh --os=windows && ./build-proxy.sh --os=linux
 
       - name: 使用 rclone 将文件上传到 OneDrive
         run: |
