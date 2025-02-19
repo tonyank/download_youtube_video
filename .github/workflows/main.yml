@@ -1,4 +1,4 @@
-name: Download Vide
+name: D
 
 on: push
 
@@ -7,25 +7,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 部署 rclone
-        run: wget -c 'https://downloads.rclone.org/v1.68.2/rclone-v1.68.2-linux-amd64.zip' && unzip 'rclone-v1.68.2-linux-amd64.zip' && echo '${{ secrets.RCLONE_CONF }}' > rclone.conf
+      - name: Deploy rclone
+        run: |
+          wget -c 'https://downloads.rclone.org/v1.69.1/rclone-v1.69.1-linux-amd64.zip'
+          unzip 'rclone-v1.69.1-linux-amd64.zip'
+          echo '${{ secrets.RCLONE_CONF }}' > rclone-v1.69.1-linux-amd64/rclone.conf
+          rm rclone-v1.69.1-linux-amd64.zip
 
-      - name: 部署 ffmpeg
-        run: wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz' && tar -xf 'ffmpeg-git-amd64-static.tar.xz'
+      - name: Deploy ffmpeg
+        run: |
+          wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz'
+          tar -xf 'ffmpeg-git-amd64-static.tar.xz'
+          rm ffmpeg-git-amd64-static.tar.xz
 
-      - name: 部署 yt-dlp
+      - name: Deploy yt-dlp
         run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.23/yt-dlp_linux'  && chmod +x ./yt-dlp_linux
 
-      #- name: 查询
-        #run: echo '${{ secrets.VIDEO_LIST }}' > video_list.txt && mkdir ./video_folder/ && cd ./video_folder/ && ../youtube-dl -F --ffmpeg-location ../ffmpeg-git-20210127-amd64-static/ffmpeg -a ../video_list.txt
-
       - name: 下载 YouTube 视频
-        # run: ./yt-dlp_linux --cookies-from-browser firefox --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
-        run: ./yt-dlp_linux --ffmpeg-location ffmpeg-git-20240629-amd64-static/ffmpeg '${{ secrets.VIDEO_URL }}' 
+        run: ./yt-dlp --ffmpeg-location ./ffmpeg-git-20220910-amd64-static/ffmpeg -o "testvideo.%(ext)s" https://hn.bfvvs.com/play/negwO6le/index.m3u8'
+
+      - name: 查看文件
+        run: ls -R
 
       - name: 使用 rclone 将文件上传到 OneDrive
         run: |
           mkdir video
-          mv *.mp4 video/
-          rclone-v1.68.2-linux-amd64/rclone copy --config rclone.conf video 'OneDrive-30GB-ty'
+          mv test* video/
+          rclone-v1.69.1-linux-amd64/rclone copy --config rclone.conf video 'OneDrive-30GB-ty:'
 
