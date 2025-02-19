@@ -21,7 +21,9 @@ jobs:
           rm ffmpeg-git-amd64-static.tar.xz
 
       - name: Deploy yt-dlp
-        run: wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.23/yt-dlp_linux'  && chmod +x ./yt-dlp_linux
+        run: |
+          wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.23/yt-dlp_linux'
+          chmod +x ./yt-dlp_linux
 
       - name: 下载 YouTube 视频
         run: ./yt-dlp --ffmpeg-location ./ffmpeg-git-20220910-amd64-static/ffmpeg -o "testvideo.%(ext)s" 'https://hn.bfvvs.com/play/negwO6le/index.m3u8'
