@@ -14,27 +14,11 @@ jobs:
           echo '${{ secrets.RCLONE_CONF }}' > rclone-v1.69.1-linux-amd64/rclone.conf
           rm rclone-v1.69.1-linux-amd64.zip
 
-      - name: Deploy ffmpeg
+      - name: Test
         run: |
-          wget -c 'https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz'
-          tar -xf 'ffmpeg-git-amd64-static.tar.xz'
-          rm ffmpeg-git-amd64-static.tar.xz
+          tree
+          tree -h
+          tree --help
 
-      - name: Deploy yt-dlp
-        run: |
-          wget -c 'https://github.com/yt-dlp/yt-dlp/releases/download/2024.12.23/yt-dlp_linux'
-          chmod +x ./yt-dlp_linux
 
-      - name: 下载 YouTube 视频
-        # run: ./yt-dlp_linux -o "testvideo.%(ext)s" --downloader aria2c --downloader-args "aria2c:-x 16 -k 1M" --ffmpeg-location ./ffmpeg-git-20240629-amd64-static/ffmpeg 'https://hn.bfvvs.com/play/negwO6le/index.m3u8'
-        run: ./yt-dlp_linux -o "testvideo.%(ext)s" --downloader aria2c --downloader-args "aria2c:-x 16 -k 1M" --ffmpeg-location ./ffmpeg-git-20240629-amd64-static/ffmpeg 'https://play.subokk.com/play/mbkAkDYe/index.m3u8'
-
-      - name: 查看文件
-        run: ls -R
-
-      - name: 使用 rclone 将文件上传到 OneDrive
-        run: |
-          mkdir video
-          mv test* video/
-          rclone-v1.69.1-linux-amd64/rclone --config rclone.conf copy -P video 'OneDrive-30GB-ty:'
-
+    
